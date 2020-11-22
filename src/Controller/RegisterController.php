@@ -15,8 +15,9 @@ class RegisterController extends AbstractController
 {
     private $entityManager;
 
-    public function FunctionName(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
+
         $this->entityManager = $entityManager;
     }
 
@@ -38,6 +39,8 @@ class RegisterController extends AbstractController
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('register/index.html.twig', [

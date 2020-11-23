@@ -8,4 +8,11 @@
     vos
     informations personnelles
 </p>
+<hr>
+
+{% if notification %}
+<div class="alert alert-info">{{ notification }}</div>
+{% endif %}
+
+<p><a href="{{ path('account_password') }}">Modifier mon mot de passe</a></p>
 {% endblock %}

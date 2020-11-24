@@ -31,7 +31,6 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $tmp_name = $_FILES['Product']['name']['illustration']['file'];
         $filename = uniqid();
         $extension = pathinfo($_FILES['Product']['name']['illustration']['file'], PATHINFO_EXTENSION);
-
         $project_dir = $this->appKernel->getProjectDir();
         rename(
             $project_dir . '/public/uploads/images/products/' . $tmp_name,
@@ -46,7 +45,6 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!($event->getEntityInstance() instanceof Product)) {
             return;
         }
-
         if ($_FILES['Product']['name']['illustration']['file'] != '') {
             $this->uploadIllustration($event);
         }

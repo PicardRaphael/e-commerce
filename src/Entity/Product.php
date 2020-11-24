@@ -89,8 +89,7 @@ class Product
 
     public function setIllustration(?string $illustration): self
     {
-        $this->illustration = $illustration;
-
+        $this->illustration = basename($illustration);
         return $this;
     }
 

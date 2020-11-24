@@ -27,14 +27,16 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
     public function uploadIllustration($event)
     {
-        $entity = $event->getEntityInsctance();
-        $tmp_name = $_FILES['Product']['tmp_name']['illustration']['file'];
+        $entity = $event->getEntityInstance();
+        $tmp_name = $_FILES['Product']['name']['illustration']['file'];
         $filename = uniqid();
         $extension = pathinfo($_FILES['Product']['name']['illustration']['file'], PATHINFO_EXTENSION);
 
         $project_dir = $this->appKernel->getProjectDir();
-
-        move_uploaded_file($tmp_name, $project_dir . 'public/uploads/products/' . $filename . '.' . $extension);
+        rename(
+            $project_dir . '/public/uploads/images/products/' . $tmp_name,
+            $project_dir . '/public/uploads/images/products/' . $filename . '.' . $extension
+        );
 
         $entity->setIllustration($filename . '.' . $extension);
     }
@@ -45,7 +47,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($_FILES['Product']['tmp_name']['illustration']['file'] != '') {
+        if ($_FILES['Product']['name']['illustration']['file'] != '') {
             $this->uploadIllustration($event);
         }
     }

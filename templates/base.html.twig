@@ -14,8 +14,17 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('assets/css/boutiquefrancaise.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/brands.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/solid.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/regular.min.css')}}">
+    <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
     <style>
+        body {
+            padding-bottom: 0;
+        }
+
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -31,8 +40,6 @@
             }
         }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -46,13 +53,28 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                        <a class="nav-link" href="{{ path('products')}}">Nos produits</a>
                     </li>
                 </ul>
                 {% if app.user %}
                 <div class="dropdown">
+                    <a href="#" data-toggle="dropdown"
+                        class="nav-item nav-item-icon nav-link dropdown-toggle user-action text-white"><i
+                            class="far fa-user-circle"></i>{{ app.user.firstname }}
+                        {{ app.user.lastname}}</a>
+                    <div class="dropdown-menu dropdown-menu-right w-100" aria-labelledby="dropdownMenu2">
+                        <a href="{{ path("account") }}"
+                            class="nav-item nav-item-icon nav-link user-action dropdown-item"><i
+                                class="fas fa-house-user"></i>
+                            Compte</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a href="{{ path("app_logout") }}"
+                            class="nav-item nav-item-icon nav-link user-action dropdown-item"><i
+                                class="fas fa-sign-out-alt"></i>
+                            Déconnexion</a>
+                    </div>
+                </div>
+                <!-- <div class="dropdown">
                     <a href="#" data-toggle="dropdown"
                         class="nav-item nav-item-icon nav-link dropdown-toggle user-action text-white"><i
                             class="far fa-user-circle"></i>{{ app.user.firstname }}
@@ -68,7 +90,7 @@
                                 class="fas fa-sign-out-alt"></i>
                             Déconnexion</a>
                     </div>
-                </div>
+                </div> -->
                 {% else %}
                 <div class="dropdown">
                     <a href="#" data-toggle="dropdown"
@@ -161,19 +183,19 @@
             {% block content %}
             {% endblock %}
         </div>
+    </main>
 
-        <!-- FOOTER -->
-        <footer class="container mt-5">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>&copy; 2020 Raphaël PICARD. &middot;
+    <!-- FOOTER -->
+    <footer class="footer-custom mt-5">
+        <p>&copy; 2020 Raphaël PICARD<br>
+            <small>
+                La boutique 100% made in France
                 <a href="#">Privacy</a>
                 &middot;
                 <a href="#">Terms</a>
-            </p>
-        </footer>
-    </main>
+            </small>
+        </p>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
 </body>

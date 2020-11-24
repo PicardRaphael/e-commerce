@@ -13,9 +13,7 @@ body {
 }
 
 .footer-custom {
-    position: absolute;
     text-align: center;
-    bottom: 0;
     width: 100%;
     background-color: #343a40;
     padding: 25px 0;

@@ -1,7 +1,3 @@
-body {
-    padding-bottom: 0;
-}
-
 .nav-item-icon {
     display: flex;
     align-items: center;
@@ -12,6 +8,7 @@ body {
     margin-right: 0.5rem;
 }
 
+/* Products  Page*/
 .product-item {
     margin-top: 50px;
 }
@@ -32,9 +29,14 @@ body {
 .product-item .product-price {
     font-size: 15px;
     font-weight: 700;
-
 }
 
+/* Product Page */
+.product-page-price {
+    font-size: 19px;
+}
+
+/* Footer */
 .footer-custom {
     text-align: center;
     width: 100%;

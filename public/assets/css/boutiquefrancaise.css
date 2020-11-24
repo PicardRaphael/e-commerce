@@ -1,0 +1,32 @@
+body {
+    padding-bottom: 0;
+}
+
+.nav-item-icon {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item-icon i {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.footer-custom {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40;
+    padding: 25px 0;
+}
+
+.footer-custom p,
+.footer-custom a {
+    color: white;
+}
+
+.footer-custom p {
+    font-weight: 700;
+
+}

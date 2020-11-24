@@ -87,7 +87,7 @@ class Product
         return $this->illustration;
     }
 
-    public function setIllustration(string $illustration): self
+    public function setIllustration(?string $illustration): self
     {
         $this->illustration = $illustration;
 

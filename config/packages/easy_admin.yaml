@@ -1,0 +1,22 @@
+easy_admin:
+  entities:
+    Product:
+      form:
+        fields:
+          - { property: "illustrationFile", type: "vich_image" }
+      # ...
+      list:
+        fields:
+          - {
+              property: "product_illustration",
+              type: "image",
+              base_path: "%app.path.product_illustration%",
+            }
+      # ...
+      show:
+        fields:
+          - {
+              property: "product_illustration",
+              type: "image",
+              base_path: "%app.path.product_illustration%",
+            }

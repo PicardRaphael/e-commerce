@@ -14,8 +14,16 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('assets/css/boutiquefrancaise.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/brands.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/solid.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/regular.min.css')}}">
     <style>
+        .body {
+            padding-bottom: 0;
+        }
+
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -35,7 +43,8 @@
     <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="body">
+    <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <a class="navbar-brand" href="{{ path('home') }}">La boutique Française</a>
@@ -46,15 +55,56 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                        <a class="nav-link" href="#">Nos produits</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Qui sommes-nous ?</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Contact</a>
                     </li>
                 </ul>
-                <form class="form-inline mt-2 mt-md-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Votre recherche" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                {% if app.user %}
+                <div class="dropdown">
+                    <a href="#" data-toggle="dropdown"
+                        class="nav-item nav-item-icon nav-link dropdown-toggle user-action text-white"><i
+                            class="far fa-user-circle"></i>{{ app.user.firstname }}
+                        {{ app.user.lastname}} <b class="caret"></b></a>
+                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenu2">
+                        <a href="{{ path("account") }}" class="nav-item nav-link user-action dropdown-item"><svg
+                                class="bi align-bottom" width="25" height="25" fill="currentColor">
+                                <use xlink:href="{{ asset('assets/icons/bootstrap-icons.svg') }}#house-door" />
+                            </svg>
+                            Compte</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a href="{{ path("app_logout") }}" class="nav-item nav-link user-action dropdown-item"><svg
+                                class="bi align-bottom" width="25" height="25" fill="currentColor">
+                                <use xlink:href="{{ asset('assets/icons/bootstrap-icons.svg') }}#door-closed" />
+                            </svg>
+                            Déconnexion</a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="dropdown">
+                    <a href="#" data-toggle="dropdown"
+                        class="nav-item nav-link dropdown-toggle user-action text-white"><svg class="bi align-bottom"
+                            width="25" height="25" fill="currentColor">
+                            <use xlink:href="{{ asset('assets/icons/bootstrap-icons.svg') }}#person-circle" />
+                        </svg></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                        <a href="{{ path("app_login") }}" class="nav-item nav-link user-action dropdown-item"><svg
+                                class="bi align-bottom" width="25" height="25" fill="currentColor">
+                                <use xlink:href="{{ asset('assets/icons/bootstrap-icons.svg') }}#door-open" />
+                            </svg>
+                            Connexion</a>
+                        <a href="{{ path("register") }}" class="nav-item nav-link user-action dropdown-item"><svg
+                                class="bi align-bottom" width="25" height="25" fill="currentColor">
+                                <use xlink:href="{{ asset('assets/icons/bootstrap-icons.svg') }}#person-plus" />
+                            </svg>
+                            Inscription</a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </nav>
     </header>
@@ -130,19 +180,15 @@
             {% block content %}
             {% endblock %}
         </div>
-
-        <!-- FOOTER -->
-        <footer class="container mt-5">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>&copy; 2020 Raphaël PICARD. &middot;
-                <a href="#">Privacy</a>
-                &middot;
-                <a href="#">Terms</a>
-            </p>
-        </footer>
     </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-custom">
+        <p>&copy; 2020 Raphaël PICARD.</br>
+            <small>La boutique 100% made in France</br>
+                <a href="#">Privacy</a> . <a href="#">Terms</a></small>
+        </p>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
 </body>

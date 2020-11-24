@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @Vich\Uploadable
  */
 class Product
 {
@@ -31,6 +35,12 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $illustration;
+
+    /**
+     * @Vich\UploadableField(mapping="product_illustration", fileNameProperty="illustration")
+     * @var File
+     * */
+    private $illustrationFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -82,17 +92,45 @@ class Product
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getIllustration(): ?string
     {
         return $this->illustration;
     }
 
-    public function setIllustration(string $illustration): self
+    /**
+     * @param mixed $thumbnail
+     */
+    public function setIllustration(?string $illustration): self
     {
         $this->illustration = $illustration;
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIllustrationFile(): ?File
+    {
+        return $this->illustrationFile;
+    }
+
+    public function setIllustrationFile(File $illustration = null)
+    {
+        $this->illustrationFile = $illustration;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($illustration) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
 
     public function getSubtitle(): ?string
     {

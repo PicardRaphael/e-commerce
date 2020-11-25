@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier - La boutique Française{% endblock %}
+
+{% block content %}
+<h1>Mon panier</h1>
+<p>Retrouvez l'ensemble des produits que vous avez ajouté à votre panier.</p>
+
+{% if cart|length > 0 %}
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th scope="col-2">Produit</th>
+            <th scope="col"></th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Total</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    {% set total = 0 %}
+    <tbody>
+        {% for product in cart %}
+        <tr>
+            <th>
+                <img src="{{ path_image_product }}/{{ product.product.illustration }}" alt="{{ product.product.name }}"
+                    height="75px">
+            </th>
+            <td>
+                {{ product.product.name }}<br>
+                <small>{{ product.product.subtitle }}</small>
+            </td>
+            <td>
+                <a href="{{ path('decrease_to_cart', { 'id': product.product.id }) }}"
+                    alt="Retirer une quantité à mon produit" class="text-dark update-cart">
+                    <i class="far fa-minus-square"></i>
+                </a>
+                &nbsp;x {{ product.quantity }}&nbsp;
+                <a href="{{ path('add_to_cart', { 'id': product.product.id })}}"
+                    alt="Ajouter une quantité à mon produit" class="text-dark update-cart">
+                    <i class="far fa-plus-square"></i>
+                </a>
+            </td>
+            <td>{{ (product.product.price / 100)|number_format(2, ',') }} €</td>
+            <td>{{ ((product.product.price * product.quantity) / 100)|number_format(2, ',') }} €</td>
+            <td>
+                <a href="{{ path('delete_to_cart', { 'id': product.product.id })}}" alt="Supprimer mon produit"
+                    class="text-dark">
+                    <i class="far fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+        {% set total = total + (product.product.price * product.quantity) %}
+        {% endfor %}
+    </tbody>
+</table>
+<div class="d-flex flex-column align-items-end">
+    <p><b>Nombre de produit :</b> {{ cart|length  }}</p>
+    <p><b>Total de mon panier :</b> {{ (total / 100)|number_format(2, ',') }} €</p>
+    <a href="" class="btn btn-success btn-block mt-3">Valider mon panier</a>
+</div>
+{% else %}
+<hr>
+<p><b>Votre panier est vide.</b></p>
+<a class="text-success" href="{{ path('products')}}">Voir les produits</a>
+{% endif %}
+<!-- <script type="text/javascript">
+    function callRoute(evt) {
+        evt.preventDefault();
+
+        const url = this.href;
+
+        axios.get(url).then(function (response) {
+            console.log(response);
+        });
+
+    }
+
+    document.querySelectorAll('a.update-cart').forEach(function (link) {
+        link.addEventListener('click', callRoute);
+    })
+</script> -->
+{% endblock %}

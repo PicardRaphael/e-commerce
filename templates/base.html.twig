@@ -60,7 +60,10 @@
                         <a class="nav-link" href="{{ path('products')}}">Nos produits</a>
                     </li>
                 </ul>
+
                 {% if app.user %}
+                <a class="nav-item nav-item-icon nav-link user-action text-white" href="{{ path('cart')}}"><i
+                        class="fas fa-shopping-cart"></i>Mon panier ( {{ app.session.get('cart')|length }} )</a>
                 <div class="dropdown">
                     <a href="#" data-toggle="dropdown"
                         class="nav-item nav-item-icon nav-link dropdown-toggle user-action text-white"><i
@@ -78,23 +81,6 @@
                             Déconnexion</a>
                     </div>
                 </div>
-                <!-- <div class="dropdown">
-                    <a href="#" data-toggle="dropdown"
-                        class="nav-item nav-item-icon nav-link dropdown-toggle user-action text-white"><i
-                            class="far fa-user-circle"></i>{{ app.user.firstname }}
-                        {{ app.user.lastname}} <b class="caret"></b></a>
-                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenu2">
-                        <a href="{{ path("account") }}"
-                            class="nav-item nav-item-icon nav-link user-action dropdown-item"><i
-                                class="fas fa-house-user">
-                                Compte</a>
-                        <div class="divider dropdown-divider"></div>
-                        <a href="{{ path("app_logout") }}"
-                            class="nav-item nav-item-icon nav-link user-action dropdown-item"><i
-                                class="fas fa-sign-out-alt"></i>
-                            Déconnexion</a>
-                    </div>
-                </div> -->
                 {% else %}
                 <div class="dropdown">
                     <a href="#" data-toggle="dropdown"
@@ -202,6 +188,8 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 </body>
 
 </html>

@@ -44,7 +44,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/prduits/{slug}", name="product")
+     * @Route("/produits/{slug}", name="product")
      */
     public function show($slug): Response
     {
